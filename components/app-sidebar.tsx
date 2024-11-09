@@ -28,7 +28,7 @@ const data = {
         {
           title: "Navigate",
           url: "/navigate",
-          icon: <Map className="mr-1" /> // You can replace this with another icon
+          icon: <Map className="mr-1" />
         },
         {
           title: "AI Assistant",
