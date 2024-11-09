@@ -1,6 +1,7 @@
-import * as React from "react"
+import * as React from "react";
+import { Home, MessageCircle, ShoppingCart, Settings, Map, BotMessageSquare } from "lucide-react"; // Import icons
 
-import { SearchForm } from "@/components/search-form"
+import { SearchForm } from "@/components/search-form";
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 const data = {
   navMain: [
@@ -21,44 +22,46 @@ const data = {
       items: [
         {
           title: "Home",
-          url: "#",
+          url: "/",
+          icon: <Home className="mr-1" /> // Adding Home icon
         },
         {
           title: "Navigate",
-          url: "#",
-        },
-        
-        {
-          title: "Chat",
-          url: "#",
+          url: "/navigate",
+          icon: <Map className="mr-1" /> // You can replace this with another icon
         },
         {
-          title: "Store",
-          url: "#",
+          title: "AI Assistant",
+          url: "/chat",
+          icon: <BotMessageSquare className="mr-1" /> // Chat icon
         },
         {
           title: "Settings",
-          url: "#",
+          url: "/settings",
+          icon: <Settings className="mr-1" /> // Settings icon
         },
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar {...props} className="px-3">
+    <Sidebar {...props}>
       <SidebarHeader>
-        <h1 className="pt-3 pb-1">*App Logo*</h1>
+        <h1 className="pt-3 pb-1 px-3">*App Logo*</h1>
         <SearchForm />
       </SidebarHeader>
-      <SidebarContent>
-        {data.navMain.map((item) => (
-          <SidebarMenu>
-            {item.items.map((item) => (
+      <SidebarContent className="px-3">
+        {data.navMain.map((section) => (
+          <SidebarMenu key={section.url}>
+            {section.items.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild isActive={true}>
-                  <a href={item.url}>{item.title}</a>
+                  <a className="px-3 py-5 flex items-center" href={item.url}>
+                    {item.icon} {/* Render the icon */}
+                    {item.title} {/* Render the title */}
+                  </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
@@ -67,5 +70,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
